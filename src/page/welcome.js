@@ -1,5 +1,5 @@
 import React from 'react'
-import WebApi from './../api/api'
+import ajax from './../api/api'
 import { async } from 'q';
 
 export default class WelcomePage extends React.Component {
@@ -20,8 +20,7 @@ export default class WelcomePage extends React.Component {
     //     }
 }
 async function getData() {
-    var url = `http://localhost:3000/api/test/findAll`
-    var datap = new WebApi()
-    var result = await datap.GET(url, {})
-    console.log(result)
+    var url = `/api/test/findAll`
+    var result = await ajax.GET(url, {})
+    debugger
 }

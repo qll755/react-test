@@ -1,43 +1,34 @@
-// 封装axios  生成webapi
-import axios from 'axios';
-import { Promise, reject } from 'q';
-import { Resolver } from 'dns';
-
-
-class WebApi {
+import axios from 'axios'
+import { reject, resolve, Promise } from 'q';
+const config = {
+    baseURL: "http://localhost:3000"
+}
+class HttpRequest {
     constructor() {
-        this.request = axios
+        this.ajax = axios.create(config)
     }
-    GET(url, data) {
-        var result = this.request({
+    async GET(url, data = {}) {
+        let config = {
             url: url,
             method: 'get',
-            parmas: data,
-        })
-        console.log(result)
-        this.AWP(result)
-    }
-    AWP(data) {
-        try {
-            var promise = new Promise((Resolver, reject) => {
-                Resolver(data)
-                reject(data)
-            })
-            var obj = promise.then((data) => {
-                if (data.status === 200) {
-                    console.log('操作成功   ' + data)
-                    return data
-                } else {
-                    console.log('数据库连接异常！   ' + data.data)
-                }
-            }).catch((data) => {
-                console.log('数据解析失败！！' + data)
-            })
-        } catch (error) {
-            console.log('解析出错')
+            params: data
         }
+        let result = await this.http(config)
+        return result
     }
-
+    async http(webcon) {
+        let ajax = this.ajax
+        let result = await ajax(webcon);
+        return new Promise((resolve, reject) => {
+            if (result.status == 200) {
+                // 等待axios发送一次请求后  查看状态码判断是否请求完全成功  然后再通过promise对象的resolve解析axios返回的result在.then的方法中可以取到解析的值
+                resolve(result);
+                console('请求成功')
+            } else {
+                console.log('请求失败')
+            }
+        })
+    }
 }
-
-export default WebApi
+let ajax = new HttpRequest();
+export default ajax
