@@ -1,26 +1,26 @@
 import React from 'react'
 import ajax from './../api/api'
 import { async } from 'q';
-
+import { getData } from './../api/test'
 export default class WelcomePage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { data: [] }
+    }
     render() {
         return (
             <div>
-                <button onClick={getData}></button>
-                这个是欢迎页
+                <button onClick={(e) => { this.getData(e) }}>获取所有数据</button>
+                获取的数据{this.state.data}
             </div>
 
         )
     }
-    //      getData = (e) => {
-    //         var url = `http://192.168.1.234:9023/CompDeptHandler/AppHandler.ashx?OP=AppUserAccount`
-    //         var datap = new WebApi()
-    //         var result =  datap.GET(url, {})
-    // debugger
-    //     }
-}
-async function getData() {
-    var url = `/api/test/findAll`
-    var result = await ajax.GET(url, {})
-    debugger
+    getData = async (e) => {
+        var result = await getData()
+        
+        this.setState({
+            data: JSON.stringify(result)
+        })
+    }
 }
