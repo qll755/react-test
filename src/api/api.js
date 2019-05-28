@@ -16,6 +16,15 @@ class HttpRequest {
         let result = await this.http(config)
         return result
     }
+    async POST(url, data) {
+        let config = {
+            url: url,
+            method: 'get',
+            data: data
+        }
+        let result = await this.http(config)
+        return result
+    }
     async http(webcon) {
         let ajax = this.ajax
         let result = await ajax(webcon);
