@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import App from './App';
-import App from './router/index.js'
+// import App from './router/index.js'
+import App from './hc_router/index.js';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));

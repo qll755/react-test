@@ -1,0 +1,5 @@
+.card-body{padding:0 0 0 }
+.card-body p{margin-bottom:0;padding:0 0 0 1.75rem}
+.card,.card-header{border:0 solid rgba(0,0,0,.125)}
+.card{background:#34495e;color:#fff}
+.card-body p:hover,.accordion>.card .card-header:hover{background:#233342}
